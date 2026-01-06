@@ -26,6 +26,11 @@ WORKDIR /app
 # Copy the jar from the build stage
 COPY --from=build /app/build/libs/TokenGenerator-1.0-SNAPSHOT.jar app.jar
 
+# Generate a self-signed certificate for HTTPS support
+RUN keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -storetype PKCS12 \
+    -keystore keystore.p12 -validity 3650 -dname "CN=TokenGenerator" \
+    -storepass password -keypass password
+
 # Create a volume for the SQLite database
 VOLUME /app/db
 
