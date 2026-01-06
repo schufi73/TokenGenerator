@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/codes")
 public class CodeController {
     private final CodeService codeService;
