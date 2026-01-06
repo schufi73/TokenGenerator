@@ -30,7 +30,7 @@ COPY --from=build /app/build/libs/TokenGenerator-1.0-SNAPSHOT.jar app.jar
 VOLUME /app/db
 
 # Expose the application port
-EXPOSE 8080
+EXPOSE 8443
 
 # Environment variable for the database path
 ENV DB_PATH=/app/db/codes.db

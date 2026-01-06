@@ -2,7 +2,7 @@ services:
   token-generator:
     build: https://github.com/schufi73/TokenGenerator.git#master
     ports:
-      - "8080:8080"
+      - "8443:8443"
     volumes:
       - ./data:/app/db
     restart: always
