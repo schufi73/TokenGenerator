@@ -51,6 +51,10 @@ public class CodeService {
         return Optional.of(entry);
     }
 
+    public java.util.List<CodeEntry> getAllCodes() {
+        return repository.findAll();
+    }
+
     public boolean deleteCode(String code) {
         return repository.deleteByCode(code);
     }

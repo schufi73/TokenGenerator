@@ -29,6 +29,18 @@ public class CodeController {
         ));
     }
 
+    @GetMapping
+    public ResponseEntity<java.util.List<Map<String, Object>>> getAllCodes() {
+        java.util.List<Map<String, Object>> codes = codeService.getAllCodes().stream()
+                .map(entry -> Map.<String, Object>of(
+                        "code", entry.getCode(),
+                        "expiresAt", entry.getExpiresAt().toString(),
+                        "createdAt", entry.getCreatedAt().toString()
+                ))
+                .toList();
+        return ResponseEntity.ok(codes);
+    }
+
     @GetMapping("/{code}")
     public ResponseEntity<Map<String, Object>> getCode(@PathVariable String code) {
         Optional<CodeEntry> opt = codeService.getIfValid(code);

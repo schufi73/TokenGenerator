@@ -54,6 +54,11 @@ public class CodeRepository {
         return jdbcTemplate.query(sql, ROW_MAPPER, code).stream().findFirst();
     }
 
+    public java.util.List<CodeEntry> findAll() {
+        String sql = "SELECT id, code, created_at, expires_at FROM codes";
+        return jdbcTemplate.query(sql, ROW_MAPPER);
+    }
+
     public boolean deleteByCode(String code) {
         String sql = "DELETE FROM codes WHERE code = ?";
         int updated = jdbcTemplate.update(sql, code);
