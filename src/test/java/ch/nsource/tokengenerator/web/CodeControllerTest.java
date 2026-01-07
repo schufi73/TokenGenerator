@@ -1,6 +1,7 @@
 package ch.nsource.tokengenerator.web;
 
 import ch.nsource.tokengenerator.model.CodeEntry;
+import ch.nsource.tokengenerator.model.OperatingSystem;
 import ch.nsource.tokengenerator.service.CodeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,24 +33,30 @@ public class CodeControllerTest {
 
     @Test
     public void testCreateCode_Success() throws Exception {
-        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600));
-        when(codeService.generateAndStore()).thenReturn(entry);
+        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600), OperatingSystem.WINDOWS);
+        when(codeService.generateAndStore(OperatingSystem.WINDOWS)).thenReturn(entry);
 
-        mockMvc.perform(post("/codes"))
+        mockMvc.perform(post("/codes")
+                        .contentType("application/json")
+                        .content("{\"serverOs\":\"WINDOWS\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.code").value("123456"))
                 .andExpect(jsonPath("$.expiresAt").exists())
-                .andExpect(jsonPath("$.createdAt").exists());
+                .andExpect(jsonPath("$.createdAt").exists())
+                .andExpect(jsonPath("$.serverOs").value("WINDOWS"))
+                .andExpect(jsonPath("$.clientOs").doesNotExist());
     }
 
     @Test
     public void testGetCode_Success() throws Exception {
-        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600));
+        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600), OperatingSystem.WINDOWS);
         when(codeService.getIfValid("123456")).thenReturn(Optional.of(entry));
 
         mockMvc.perform(get("/codes/123456"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value("123456"));
+                .andExpect(jsonPath("$.code").value("123456"))
+                .andExpect(jsonPath("$.serverOs").value("WINDOWS"))
+                .andExpect(jsonPath("$.clientOs").doesNotExist());
     }
 
     @Test
@@ -58,7 +65,8 @@ public class CodeControllerTest {
 
         mockMvc.perform(get("/codes/999999"))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.error").value("Code not found or expired"));
+                .andExpect(jsonPath("$.error").value("Code not found or expired"))
+                .andExpect(jsonPath("$.clientOs").doesNotExist());
     }
 
     @Test
@@ -75,5 +83,14 @@ public class CodeControllerTest {
 
         mockMvc.perform(delete("/codes/999999"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testCreateCode_InvalidOs() throws Exception {
+        mockMvc.perform(post("/codes")
+                        .contentType("application/json")
+                        .content("{\"serverOs\":\"LINUX\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Invalid serverOs. Must be MACOS or WINDOWS"));
     }
 }

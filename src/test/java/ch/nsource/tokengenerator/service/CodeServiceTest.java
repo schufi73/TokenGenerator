@@ -1,6 +1,7 @@
 package ch.nsource.tokengenerator.service;
 
 import ch.nsource.tokengenerator.model.CodeEntry;
+import ch.nsource.tokengenerator.model.OperatingSystem;
 import ch.nsource.tokengenerator.repository.CodeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,11 +33,12 @@ public class CodeServiceTest {
     public void testGenerateAndStore_Success() {
         when(repository.insert(any(CodeEntry.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        CodeEntry entry = codeService.generateAndStore();
+        CodeEntry entry = codeService.generateAndStore(OperatingSystem.WINDOWS);
 
         assertNotNull(entry);
         assertNotNull(entry.getCode());
         assertEquals(6, entry.getCode().length());
+        assertEquals(OperatingSystem.WINDOWS, entry.getServerOs());
         verify(repository, times(1)).insert(any(CodeEntry.class));
     }
 
@@ -46,9 +48,10 @@ public class CodeServiceTest {
                 .thenThrow(new DataIntegrityViolationException("duplicate"))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        CodeEntry entry = codeService.generateAndStore();
+        CodeEntry entry = codeService.generateAndStore(OperatingSystem.MACOS);
 
         assertNotNull(entry);
+        assertEquals(OperatingSystem.MACOS, entry.getServerOs());
         verify(repository, times(2)).insert(any(CodeEntry.class));
     }
 
@@ -58,7 +61,7 @@ public class CodeServiceTest {
                 .thenThrow(new DataIntegrityViolationException("duplicate"));
 
         assertThrows(DataIntegrityViolationException.class, () -> {
-            codeService.generateAndStore();
+            codeService.generateAndStore(OperatingSystem.WINDOWS);
         });
 
         verify(repository, times(10)).insert(any(CodeEntry.class));
@@ -66,18 +69,19 @@ public class CodeServiceTest {
 
     @Test
     public void testGetIfValid_Valid() {
-        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600));
+        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600), OperatingSystem.WINDOWS);
         when(repository.findByCode("123456")).thenReturn(Optional.of(entry));
 
         Optional<CodeEntry> result = codeService.getIfValid("123456");
 
         assertTrue(result.isPresent());
         assertEquals("123456", result.get().getCode());
+        assertEquals(OperatingSystem.WINDOWS, result.get().getServerOs());
     }
 
     @Test
     public void testGetIfValid_Expired() {
-        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now().minusSeconds(7200), Instant.now().minusSeconds(3600));
+        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now().minusSeconds(7200), Instant.now().minusSeconds(3600), OperatingSystem.MACOS);
         when(repository.findByCode("123456")).thenReturn(Optional.of(entry));
 
         Optional<CodeEntry> result = codeService.getIfValid("123456");

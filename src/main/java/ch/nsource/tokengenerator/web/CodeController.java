@@ -1,12 +1,14 @@
 package ch.nsource.tokengenerator.web;
 
 import ch.nsource.tokengenerator.model.CodeEntry;
+import ch.nsource.tokengenerator.model.OperatingSystem;
 import ch.nsource.tokengenerator.service.CodeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,24 +22,36 @@ public class CodeController {
         this.codeService = codeService;
     }
 
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> createCode() {
-        CodeEntry entry = codeService.generateAndStore();
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
+    private Map<String, Object> entryToMap(CodeEntry entry) {
+        return Map.of(
                 "code", entry.getCode(),
                 "expiresAt", entry.getExpiresAt().toString(),
-                "createdAt", entry.getCreatedAt().toString()
-        ));
+                "createdAt", entry.getCreatedAt().toString(),
+                "serverOs", entry.getServerOs()
+        );
+    }
+
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> createCode(
+            @RequestBody Map<String, String> request) {
+        String osStr = request.getOrDefault("serverOs", "MACOS");
+        OperatingSystem os;
+        try {
+            os = OperatingSystem.valueOf(osStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Invalid serverOs. Must be MACOS or WINDOWS",
+                    "timestamp", Instant.now().toString()
+            ));
+        }
+        CodeEntry entry = codeService.generateAndStore(os);
+        return ResponseEntity.status(HttpStatus.CREATED).body(entryToMap(entry));
     }
 
     @GetMapping
     public ResponseEntity<java.util.List<Map<String, Object>>> getAllCodes() {
         java.util.List<Map<String, Object>> codes = codeService.getAllCodes().stream()
-                .map(entry -> Map.<String, Object>of(
-                        "code", entry.getCode(),
-                        "expiresAt", entry.getExpiresAt().toString(),
-                        "createdAt", entry.getCreatedAt().toString()
-                ))
+                .map(this::entryToMap)
                 .toList();
         return ResponseEntity.ok(codes);
     }
@@ -52,11 +66,7 @@ public class CodeController {
             ));
         }
         CodeEntry entry = opt.get();
-        return ResponseEntity.ok(Map.of(
-                "code", entry.getCode(),
-                "expiresAt", entry.getExpiresAt().toString(),
-                "createdAt", entry.getCreatedAt().toString()
-        ));
+        return ResponseEntity.ok(entryToMap(entry));
     }
 
     @DeleteMapping("/{code}")

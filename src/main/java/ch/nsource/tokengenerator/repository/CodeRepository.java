@@ -1,6 +1,7 @@
 package ch.nsource.tokengenerator.repository;
 
 import ch.nsource.tokengenerator.model.CodeEntry;
+import ch.nsource.tokengenerator.model.OperatingSystem;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,6 +26,10 @@ public class CodeRepository {
         long expires = rs.getLong("expires_at");
         e.setCreatedAt(Instant.ofEpochSecond(created));
         e.setExpiresAt(Instant.ofEpochSecond(expires));
+        String osStr = rs.getString("server_os");
+        if (osStr != null) {
+            e.setServerOs(OperatingSystem.valueOf(osStr));
+        }
         return e;
     };
 
@@ -33,13 +38,14 @@ public class CodeRepository {
     }
 
     public CodeEntry insert(CodeEntry entry) throws DataAccessException {
-        String sql = "INSERT INTO codes(code, created_at, expires_at) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO codes(code, created_at, expires_at, server_os) VALUES(?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, entry.getCode());
             ps.setLong(2, entry.getCreatedAt().getEpochSecond());
             ps.setLong(3, entry.getExpiresAt().getEpochSecond());
+            ps.setString(4, entry.getServerOs() != null ? entry.getServerOs().name() : null);
             return ps;
         }, keyHolder);
         Number key = keyHolder.getKey();
@@ -50,12 +56,12 @@ public class CodeRepository {
     }
 
     public Optional<CodeEntry> findByCode(String code) {
-        String sql = "SELECT id, code, created_at, expires_at FROM codes WHERE code = ?";
+        String sql = "SELECT id, code, created_at, expires_at, server_os FROM codes WHERE code = ?";
         return jdbcTemplate.query(sql, ROW_MAPPER, code).stream().findFirst();
     }
 
     public java.util.List<CodeEntry> findAll() {
-        String sql = "SELECT id, code, created_at, expires_at FROM codes";
+        String sql = "SELECT id, code, created_at, expires_at, server_os FROM codes";
         return jdbcTemplate.query(sql, ROW_MAPPER);
     }
 

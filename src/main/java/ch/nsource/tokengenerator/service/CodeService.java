@@ -1,6 +1,7 @@
 package ch.nsource.tokengenerator.service;
-
+ 
 import ch.nsource.tokengenerator.model.CodeEntry;
+import ch.nsource.tokengenerator.model.OperatingSystem;
 import ch.nsource.tokengenerator.repository.CodeRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class CodeService {
         this.repository = repository;
     }
 
-    public CodeEntry generateAndStore() {
+    public CodeEntry generateAndStore(OperatingSystem serverOs) {
         Instant now = Instant.now();
         Instant expires = now.plus(MAX_TTL);
 
@@ -29,7 +30,7 @@ public class CodeService {
         while (true) {
             attempts++;
             String code = sixDigitCode();
-            CodeEntry entry = new CodeEntry(null, code, now, expires);
+            CodeEntry entry = new CodeEntry(null, code, now, expires, serverOs);
             try {
                 return repository.insert(entry);
             } catch (DataIntegrityViolationException dup) {
