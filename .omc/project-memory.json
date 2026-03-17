@@ -68,32 +68,44 @@
   "hotPaths": [
     {
       "path": "docker-compose.yml",
-      "accessCount": 6,
-      "lastAccessed": 1773757891886,
-      "type": "file"
-    },
-    {
-      "path": "Dockerfile",
-      "accessCount": 5,
-      "lastAccessed": 1773757972016,
+      "accessCount": 12,
+      "lastAccessed": 1773761648166,
       "type": "file"
     },
     {
       "path": "src/main/resources/application.properties",
-      "accessCount": 4,
-      "lastAccessed": 1773754844981,
+      "accessCount": 10,
+      "lastAccessed": 1773761639697,
+      "type": "file"
+    },
+    {
+      "path": "Dockerfile",
+      "accessCount": 10,
+      "lastAccessed": 1773761657719,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/config/WebConfig.java",
+      "accessCount": 5,
+      "lastAccessed": 1773760172026,
       "type": "file"
     },
     {
       "path": "src/main/java/ch/nsource/tokengenerator/web/CodeController.java",
-      "accessCount": 3,
-      "lastAccessed": 1773753127946,
+      "accessCount": 4,
+      "lastAccessed": 1773760179188,
       "type": "file"
     },
     {
       "path": "src/main/java/ch/nsource/tokengenerator/service/CodeService.java",
-      "accessCount": 3,
-      "lastAccessed": 1773753133145,
+      "accessCount": 4,
+      "lastAccessed": 1773760191882,
+      "type": "file"
+    },
+    {
+      "path": "src/test/java/ch/nsource/tokengenerator/web/CodeControllerTest.java",
+      "accessCount": 4,
+      "lastAccessed": 1773760215645,
       "type": "file"
     },
     {
@@ -103,9 +115,27 @@
       "type": "file"
     },
     {
-      "path": "src/test/java/ch/nsource/tokengenerator/web/CodeControllerTest.java",
+      "path": "src/main/java/ch/nsource/tokengenerator/TokenGeneratorApplication.java",
       "accessCount": 3,
-      "lastAccessed": 1773753155549,
+      "lastAccessed": 1773760172629,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/web/AdminController.java",
+      "accessCount": 3,
+      "lastAccessed": 1773760179890,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/model/CodeEntry.java",
+      "accessCount": 3,
+      "lastAccessed": 1773760191445,
+      "type": "file"
+    },
+    {
+      "path": "src/main/resources/schema.sql",
+      "accessCount": 3,
+      "lastAccessed": 1773760194463,
       "type": "file"
     },
     {
@@ -115,21 +145,9 @@
       "type": "file"
     },
     {
-      "path": "src/main/java/ch/nsource/tokengenerator/model/CodeEntry.java",
-      "accessCount": 2,
-      "lastAccessed": 1773753035936,
-      "type": "file"
-    },
-    {
       "path": "src/main/java/ch/nsource/tokengenerator/model/OperatingSystem.java",
       "accessCount": 2,
       "lastAccessed": 1773753036386,
-      "type": "file"
-    },
-    {
-      "path": "src/main/java/ch/nsource/tokengenerator/config/WebConfig.java",
-      "accessCount": 2,
-      "lastAccessed": 1773753036876,
       "type": "file"
     },
     {
@@ -139,15 +157,9 @@
       "type": "file"
     },
     {
-      "path": "src/main/resources/schema.sql",
+      "path": "src/test/java/ch/nsource/tokengenerator/web/AdminControllerTest.java",
       "accessCount": 2,
-      "lastAccessed": 1773753043169,
-      "type": "file"
-    },
-    {
-      "path": "src/main/java/ch/nsource/tokengenerator/TokenGeneratorApplication.java",
-      "accessCount": 2,
-      "lastAccessed": 1773753103464,
+      "lastAccessed": 1773760216645,
       "type": "file"
     },
     {
@@ -181,21 +193,21 @@
       "type": "file"
     },
     {
-      "path": "src/main/java/ch/nsource/tokengenerator/web/AdminController.java",
-      "accessCount": 1,
-      "lastAccessed": 1773753891296,
-      "type": "file"
-    },
-    {
       "path": "src/test/java/ch/nsource/tokengenerator/service/LoginAttemptServiceTest.java",
       "accessCount": 1,
       "lastAccessed": 1773753899709,
       "type": "file"
     },
     {
-      "path": "src/test/java/ch/nsource/tokengenerator/web/AdminControllerTest.java",
+      "path": "localhost.cer",
       "accessCount": 1,
-      "lastAccessed": 1773753913847,
+      "lastAccessed": 1773760197469,
+      "type": "file"
+    },
+    {
+      "path": "nginx.conf",
+      "accessCount": 1,
+      "lastAccessed": 1773761013430,
       "type": "file"
     }
   ],

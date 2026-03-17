@@ -1,3 +1,0 @@
-{"t":0,"agent":"system","event":"keyword_detected","keyword":"code-review"}
-{"t":0,"agent":"a5d7bec","agent_type":"Explore","event":"agent_start","parent_mode":"none"}
-{"t":0,"agent":"a5d7bec","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":53201}
