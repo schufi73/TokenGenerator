@@ -4,5 +4,8 @@ services:
     ports:
       - "8443:8443"
     volumes:
-      - ./data:/app/db
+      - db-data:/app/db
     restart: always
+
+volumes:
+  db-data:
