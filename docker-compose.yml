@@ -1,21 +1,10 @@
 services:
   token-generator:
-    build: .
-    expose:
-      - "8080"
-    volumes:
-      - db-data:/app/db
-    restart: always
-
-  nginx:
-    image: nginx:alpine
+    build: https://github.com/schufi73/TokenGenerator.git#master
     ports:
       - "8443:8443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-    depends_on:
-      - token-generator
+      - db-data:/app/db
     restart: always
 
 volumes:
