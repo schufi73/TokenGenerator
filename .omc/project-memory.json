@@ -67,6 +67,12 @@
   },
   "hotPaths": [
     {
+      "path": "docker-compose.yml",
+      "accessCount": 5,
+      "lastAccessed": 1773755042485,
+      "type": "file"
+    },
+    {
       "path": "src/main/resources/application.properties",
       "accessCount": 4,
       "lastAccessed": 1773754844981,
@@ -100,12 +106,6 @@
       "path": "src/test/java/ch/nsource/tokengenerator/web/CodeControllerTest.java",
       "accessCount": 3,
       "lastAccessed": 1773753155549,
-      "type": "file"
-    },
-    {
-      "path": "docker-compose.yml",
-      "accessCount": 3,
-      "lastAccessed": 1773754860564,
       "type": "file"
     },
     {
