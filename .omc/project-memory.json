@@ -1,0 +1,203 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1773752935254,
+  "projectRoot": "/home/schufi73/https:/github.com/schufi73/TokenGenerator.git",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Kotlin",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "build.gradle.kts"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "gradle",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "gradle": {
+      "path": "gradle",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1773752935250,
+      "keyFiles": []
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1773752935252,
+      "keyFiles": []
+    },
+    "src/test": {
+      "path": "src/test",
+      "purpose": "Test files",
+      "fileCount": 0,
+      "lastAccessed": 1773752935252,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "Dockerfile",
+      "accessCount": 3,
+      "lastAccessed": 1773753119639,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/web/CodeController.java",
+      "accessCount": 3,
+      "lastAccessed": 1773753127946,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/service/CodeService.java",
+      "accessCount": 3,
+      "lastAccessed": 1773753133145,
+      "type": "file"
+    },
+    {
+      "path": "src/test/java/ch/nsource/tokengenerator/service/CodeServiceTest.java",
+      "accessCount": 3,
+      "lastAccessed": 1773753150308,
+      "type": "file"
+    },
+    {
+      "path": "src/test/java/ch/nsource/tokengenerator/web/CodeControllerTest.java",
+      "accessCount": 3,
+      "lastAccessed": 1773753155549,
+      "type": "file"
+    },
+    {
+      "path": "src/main/resources/application.properties",
+      "accessCount": 3,
+      "lastAccessed": 1773753872142,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/repository/CodeRepository.java",
+      "accessCount": 2,
+      "lastAccessed": 1773753035546,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/model/CodeEntry.java",
+      "accessCount": 2,
+      "lastAccessed": 1773753035936,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/model/OperatingSystem.java",
+      "accessCount": 2,
+      "lastAccessed": 1773753036386,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/config/WebConfig.java",
+      "accessCount": 2,
+      "lastAccessed": 1773753036876,
+      "type": "file"
+    },
+    {
+      "path": "src/test/java/ch/nsource/tokengenerator/repository/CodeRepositoryTest.java",
+      "accessCount": 2,
+      "lastAccessed": 1773753041863,
+      "type": "file"
+    },
+    {
+      "path": "src/main/resources/schema.sql",
+      "accessCount": 2,
+      "lastAccessed": 1773753043169,
+      "type": "file"
+    },
+    {
+      "path": "docker-compose.yml",
+      "accessCount": 2,
+      "lastAccessed": 1773753045055,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/TokenGeneratorApplication.java",
+      "accessCount": 2,
+      "lastAccessed": 1773753103464,
+      "type": "file"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "accessCount": 1,
+      "lastAccessed": 1773753003653,
+      "type": "file"
+    },
+    {
+      "path": ".dockerignore",
+      "accessCount": 1,
+      "lastAccessed": 1773753012317,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1773753164003,
+      "type": "directory"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "accessCount": 1,
+      "lastAccessed": 1773753186780,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/service/LoginAttemptService.java",
+      "accessCount": 1,
+      "lastAccessed": 1773753882189,
+      "type": "file"
+    },
+    {
+      "path": "src/main/java/ch/nsource/tokengenerator/web/AdminController.java",
+      "accessCount": 1,
+      "lastAccessed": 1773753891296,
+      "type": "file"
+    },
+    {
+      "path": "src/test/java/ch/nsource/tokengenerator/service/LoginAttemptServiceTest.java",
+      "accessCount": 1,
+      "lastAccessed": 1773753899709,
+      "type": "file"
+    },
+    {
+      "path": "src/test/java/ch/nsource/tokengenerator/web/AdminControllerTest.java",
+      "accessCount": 1,
+      "lastAccessed": 1773753913847,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

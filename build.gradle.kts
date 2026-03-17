@@ -7,6 +7,11 @@ plugins {
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 repositories {
     mavenCentral()
 }
@@ -24,4 +29,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    // Spring Boot 3.3.4's Mockito/byte-buddy does not support Java 25 at runtime;
+    // run tests under Java 21 which is fully supported.
+    executable = "/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
 }

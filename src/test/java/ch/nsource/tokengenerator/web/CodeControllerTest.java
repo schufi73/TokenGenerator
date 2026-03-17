@@ -86,6 +86,27 @@ public class CodeControllerTest {
     }
 
     @Test
+    public void testGetAllCodes() throws Exception {
+        CodeEntry entry = new CodeEntry(1L, "123456", Instant.now(), Instant.now().plusSeconds(3600), OperatingSystem.WINDOWS);
+        when(codeService.getAllCodes()).thenReturn(java.util.List.of(entry));
+
+        mockMvc.perform(get("/codes"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].code").value("123456"))
+                .andExpect(jsonPath("$[0].serverOs").value("WINDOWS"));
+    }
+
+    @Test
+    public void testGetAllCodes_Empty() throws Exception {
+        when(codeService.getAllCodes()).thenReturn(java.util.List.of());
+
+        mockMvc.perform(get("/codes"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isEmpty());
+    }
+
+    @Test
     public void testCreateCode_InvalidOs() throws Exception {
         mockMvc.perform(post("/codes")
                         .contentType("application/json")

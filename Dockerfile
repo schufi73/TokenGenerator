@@ -36,4 +36,4 @@ EXPOSE 8443
 ENV DB_PATH=/app/db/codes.db
 
 # Run the application
-ENTRYPOINT ["java", "-Dspring.datasource.url=jdbc:sqlite:${DB_PATH}", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Dspring.datasource.url=jdbc:sqlite:${DB_PATH} -jar app.jar"]

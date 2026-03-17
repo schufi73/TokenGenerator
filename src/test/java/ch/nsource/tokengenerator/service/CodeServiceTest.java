@@ -99,6 +99,18 @@ public class CodeServiceTest {
     }
 
     @Test
+    public void testGetAllCodes_FiltersExpired() {
+        CodeEntry valid = new CodeEntry(1L, "111111", Instant.now(), Instant.now().plusSeconds(3600), OperatingSystem.WINDOWS);
+        CodeEntry expired = new CodeEntry(2L, "222222", Instant.now().minusSeconds(7200), Instant.now().minusSeconds(3600), OperatingSystem.MACOS);
+        when(repository.findAll()).thenReturn(java.util.List.of(valid, expired));
+
+        java.util.List<CodeEntry> result = codeService.getAllCodes();
+
+        assertEquals(1, result.size());
+        assertEquals("111111", result.get(0).getCode());
+    }
+
+    @Test
     public void testDeleteCode() {
         when(repository.deleteByCode("123456")).thenReturn(true);
         assertTrue(codeService.deleteCode("123456"));

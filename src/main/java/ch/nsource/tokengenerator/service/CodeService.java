@@ -53,7 +53,10 @@ public class CodeService {
     }
 
     public java.util.List<CodeEntry> getAllCodes() {
-        return repository.findAll();
+        Instant now = Instant.now();
+        return repository.findAll().stream()
+                .filter(e -> e.getExpiresAt().isAfter(now))
+                .toList();
     }
 
     public boolean deleteCode(String code) {

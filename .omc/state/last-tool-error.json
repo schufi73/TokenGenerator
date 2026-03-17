@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /tmp/TokenGeneratorBuild && JAVA_HOME=/home/schufi73/.local/share/mise/installs/java/25.0.1 ./gradlew test --no-daemon 2>&1\",\"timeout\":180000,\"description\":\"Run tests with Java 17 targe...",
+  "error": "Exit code 1\nWARNING: A restricted method in java.lang.System has been called\nWARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/home/schufi73/.gradle/wrapper/dists/gradle-9.0.0-bin/d6wjpkvcgsg3oed0qlfss3wgl/gradle-9.0.0/lib/native-platform-0.22-milestone-28.jar)\nWARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module\nWARNING: Restricted methods will be blocked in a future re...",
+  "timestamp": "2026-03-17T13:16:21.923Z",
+  "retry_count": 5
+}
