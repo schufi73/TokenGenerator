@@ -1,6 +1,6 @@
 services:
   token-generator:
-    build: .
+    build: https://github.com/schufi73/TokenGenerator.git#master
     ports:
       - "8443:8443"
     volumes:

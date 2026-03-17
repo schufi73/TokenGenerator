@@ -29,7 +29,10 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-    // Spring Boot 3.3.4's Mockito/byte-buddy does not support Java 25 at runtime;
-    // run tests under Java 21 which is fully supported.
-    executable = "/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
+    // Spring Boot 3.3.4's Mockito/byte-buddy does not support Java 25 at runtime.
+    // If Java 21 is available on this machine, use it to run tests.
+    val java21 = File("/usr/lib/jvm/java-21-openjdk-amd64/bin/java")
+    if (java21.exists()) {
+        executable = java21.absolutePath
+    }
 }
